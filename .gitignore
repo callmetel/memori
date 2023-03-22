@@ -9,9 +9,8 @@ wp-content/*
 !wp-content/themes/
 
 # ignore specific themes
-wp-content/themes/twentytwentyone/
-wp-content/themes/twentytwentytwo/
-wp-content/themes/twentytwentythree/
+wp-content/themes/twenty*/
+wp-content/themes/Divi/
 
 # ignore node dependency directories
 node_modules/

@@ -1,0 +1,337 @@
+/*
+ Theme Name:   Divi Child Theme
+ Theme URI:    https://callmetel.com/
+ Description:  Divi Child Theme
+ Author:       Divi
+ Author URI:   https://callmetel.com
+ Template:     Divi
+ Version:      0.0.1
+ License:      GNU General Public License v2 or later
+ License URI:  http://www.gnu.org/licenses/gpl-2.0.html
+ Tags: responsive-layout, one-column, two-columns, three-columns, four-columns, left-sidebar, right-sidebar, custom-background, custom-colors, featured-images, full-width-template, post-formats, rtl-language-support, theme-options, threaded-comments, translation-ready
+ Text Domain:  divi-child-theme
+*/
+
+
+/*------------------------------------------------*/
+/*-----------------[BASIC STYLES]-----------------*/
+/*------------------------------------------------*/
+
+:root {
+  --tan: #8C8272;
+  --lighttan: #D8D0C6;
+  --darkgray: #3D3C3C;
+  --lightgray1: #DFDEDE;
+  --lightgray2: #E5E5E5;
+  --lightgray3: #F2F2F2;
+  --black: #201E1E;
+}
+
+html,
+body {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+}
+
+body {
+  background-color: var(--lighttan);
+}
+
+.et_pb_section {
+  background-color: var(--lighttan);
+}
+
+
+/*------------------------------------------------*/
+/*------------------[FONT STYLES]-----------------*/
+/*------------------------------------------------*/
+
+p,
+li,
+a,
+input,
+textarea,
+div,
+button {}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+h1 *,
+h2 *,
+h3 *,
+h4 *,
+h5 *,
+h6 * {}
+
+
+/*------------------------------------------------*/
+/*-----------------[HEADER STYLES]----------------*/
+/*------------------------------------------------*/
+
+#main-header {
+  box-shadow: none;
+}
+
+#main-header .menu-item {
+  font-weight: 400;
+  text-transform: lowercase;
+}
+
+#main-header .et-cart-info {
+  display: none;
+}
+
+@media only screen and (min-width: 981px) {
+  #main-header #top-menu-nav {
+    width: 100%;
+  }
+
+  #main-header #top-menu {
+    display: flex;
+    align-items: center;
+  }
+
+  #main-header .menu-item.left {
+    margin-left: 0;
+    margin-right: auto;
+  }
+
+  #main-header .menu-item.right {
+    margin-right: 0;
+    margin-left: auto;
+  }
+
+  #main-header .menu-item a {
+    font-size: 30px;
+  }
+
+  #main-header .menu-item.menu-cart a {
+    font-size: 0;
+    line-height: 0;
+    padding-bottom: 10px;
+  }
+
+  #main-header .menu-cart a:before {
+    content: '';
+    display: inline-block;
+    width: 50px;
+    height: 53px;
+    background-image: url(/wp-content/uploads/bag-icon.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    line-height: 0;
+  }
+
+
+}
+
+/*------------------------------------------------*/
+/*---------------[MAIN LAYOUT INFO]---------------*/
+/*------------------------------------------------*/
+
+#main-home {
+  padding: 0;
+}
+
+#main-home .et_pb_row {
+  width: 95%;
+  max-width: 95%;
+}
+
+#main-home .left-column {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 50px;
+  grid-row: auto;
+}
+
+#main-home .main-image {
+  display: flex;
+  align-items: center;
+  margin: 0;
+}
+
+#main-home .main-text {
+  text-align: center;
+  font-size: 24px;
+}
+
+#main-home .main-text p {
+  font-size: 24px;
+  font-weight: 400;
+}
+
+#main-home .main-button {
+  font-size: 36px;
+  font-weight: 400;
+  text-transform: uppercase;
+  border-radius: 22px;
+}
+
+#main-home .main-button:after {
+  font-size: 36px;
+}
+
+
+/*---------------------------------------------------*/
+/*----------------[WOOCOMMERCE STYLES]---------------*/
+/*---------------------------------------------------*/
+
+
+
+/*------------------------------------------------*/
+/*---------------[HOME PAGE STYLES]---------------*/
+/*------------------------------------------------*/
+
+
+
+/*----------------------------------------------*/
+/*--------------[SUB PAGE STYLES]---------------*/
+/*----------------------------------------------*/
+
+
+/*-------------------------------------------*/
+/*----------------[SIDEBAR]------------------*/
+/*-------------------------------------------*/
+
+
+/*--------------------------------------------*/
+/*-----------------[FOOTER]-------------------*/
+/*--------------------------------------------*/
+
+#main-footer-subscribe h2.et_pb_module_header {
+  color: var(--tan) !important;
+  font-weight: 400;
+  text-transform: lowercase;
+}
+
+#main-footer-subscribe .et_pb_newsletter_field {
+  padding-bottom: 0 !important;
+}
+
+#main-footer-subscribe #et_pb_signup_email {
+  background-color: var(--lightgray1);
+  border: 1px solid var(--tan);
+  border-radius: 40px;
+  text-align: center;
+}
+
+#main-footer-subscribe #et_pb_signup_email::placeholder {
+  color: #858484;
+}
+
+#main-footer-subscribe .et_pb_newsletter_button_wrap {
+  position: absolute;
+  right: 0;
+}
+
+#main-footer-subscribe .et_pb_newsletter_button {
+  border-radius: 100%;
+  padding: 0;
+  display: block;
+  width: 50px;
+  height: 49px;
+  text-align: center;
+}
+
+#main-footer-subscribe .et_pb_newsletter_button .et_pb_newsletter_button_text {
+  font-size: 0;
+}
+
+body #page-container .et_pb_section .et_pb_signup_0_tb_footer#main-footer-subscribe.et_pb_subscribe .et_pb_newsletter_button.et_pb_button:after {
+  font-weight: 400 !important;
+  font-size: 40px !important;
+  top: 18%;
+  left: 88%;
+  right: unset;
+}
+
+#main-footer-products-title {
+  padding-top: 50px;
+}
+
+#main-footer-products-title h2,
+#main-footer-contact-us-title h2 {
+  font-weight: 400;
+}
+
+#main-footer-menu .menu-item:nth-of-type(2) {
+  display: flex;
+  align-items: center;
+}
+
+#main-footer-menu .menu-item:nth-of-type(2):before,
+#main-footer-menu .menu-item:nth-of-type(2):after {
+  content: '●';
+  display: inline-block;
+  font-size: 25px;
+}
+
+#main-footer-menu .menu-item:nth-of-type(2):before {
+  padding-right: 20px;
+}
+
+#main-footer-menu .menu-item:nth-of-type(2):after {
+  padding-left: 20px;
+}
+
+#main-footer-menu .menu-item a {
+  color: var(--tan);
+  font-size: 24px;
+  font-weight: 400;
+}
+
+/*------------------------------------------------*/
+/*---------------[RESPONSIVE LAYOUTS]-------------*/
+/*------------------------------------------------*/
+
+/*-------------------[1280px]------------------*/
+
+@media only screen and (min-width: 1280px) {}
+
+@media only screen and (min-width: 980px) and (max-width: 1280px) {}
+
+
+/*-------------------[1024px]------------------*/
+
+@media only screen and (min-width: 1025px) {}
+
+@media only screen and (max-width: 1024px) {}
+
+@media only screen and (min-width: 981px) {}
+
+/*-------------------[980px-1200px]------------------*/
+
+@media only screen and (max-width: 980px) {}
+
+/*-------------------[768px-980px]------------------*/
+
+@media only screen and (min-width: 768px) and (max-width: 980px) {}
+
+/*-------------------[780px]------------------*/
+
+@media only screen and (min-width: 768px) {}
+
+@media only screen and (max-width: 767px) {}
+
+/*-------------------[640px]------------------*/
+
+@media only screen and (max-width: 640px) {}
+
+@media only screen and (min-width: 600px) {}
+
+
+@media only screen and (max-width: 600px) {}
+
+/*-------------------[480px]------------------*/
+
+@media only screen and (min-width: 480px) {}
+
+@media only screen and (max-width: 479px) {}
+
+@media only screen and (max-width: 329px) {}
