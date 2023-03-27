@@ -74,3 +74,21 @@ function df_disable_comments_status()
 {
 	return false;
 }
+
+add_filter('template_include', 'cyob_single_product_template_include', 50, 1);
+function cyob_single_product_template_include($template)
+{
+	if (is_singular('product') && (has_term('cyob', 'product_cat'))) {
+		$template = get_stylesheet_directory() . '/woocommerce/single-product-cyob.php';
+	}
+	return $template;
+}
+
+add_filter('template_include', 'premade_single_product_template_include', 50, 1);
+function premade_single_product_template_include($template)
+{
+	if (is_singular('product') && (has_term('premade', 'product_cat'))) {
+		$template = get_stylesheet_directory() . '/woocommerce/single-product-premade.php';
+	}
+	return $template;
+}
