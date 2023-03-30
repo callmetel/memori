@@ -23,42 +23,61 @@ if (!defined('ABSPATH')) {
 global $product;
 
 get_header('shop'); ?>
+<div class="single-product-premade container-lg">
+    <?php while (have_posts()) :
+        the_post();
+        /**
+         * Hook: woocommerce_before_single_product.
+         *
+         * @hooked woocommerce_output_all_notices - 10
+         */
+        do_action('woocommerce_before_single_product');
 
-	<?php
-    /**
-     * woocommerce_before_main_content hook.
-     *
-     * @hooked woocommerce_output_content_wrapper - 10 (outputs opening divs for the content)
-     * @hooked woocommerce_breadcrumb - 20
-     */
-    // do_action('woocommerce_before_main_content');
+        if (post_password_required()) {
+            echo get_the_password_form(); // WPCS: XSS ok.
+            return;
+        }
     ?>
+        <div id="product-<?php the_ID(); ?>" <?php wc_product_class('', $product); ?>>
 
-		<?php while (have_posts()) : ?>
-			<?php the_post(); ?>
+            <?php
+            /**
+             * Hook: woocommerce_before_single_product_summary.
+             *
+             * @hooked woocommerce_show_product_sale_flash - 10
+             * @hooked woocommerce_show_product_images - 20
+             */
+            do_action('woocommerce_before_single_product_summary');
+            ?>
 
+            <div class="summary entry-summary">
+                <?php
+                /**
+                 * Hook: woocommerce_single_product_summary.
+                 *
+                 * @hooked woocommerce_template_single_title - 5
+                 * @hooked woocommerce_template_single_rating - 10
+                 * @hooked woocommerce_template_single_price - 10
+                 * @hooked woocommerce_template_single_excerpt - 20
+                 * @hooked woocommerce_template_single_add_to_cart - 30
+                 * @hooked woocommerce_template_single_meta - 40
+                 * @hooked woocommerce_template_single_sharing - 50
+                 * @hooked WC_Structured_Data::generate_product_data() - 60
+                 */
+                do_action('woocommerce_single_product_summary');
+                ?>
+            </div>
+        </div>
 
-		<?php endwhile; // end of the loop. 
-        ?>
+        <?php do_action('woocommerce_after_single_product'); ?>
+        <div class="disclaimer product-disclaimer container">
+            <p class="text-center bold h6">all production of books, materials, and processing are sustianable carbon. <br /> reduced carbon emissions, sustainable and local production</p>
+        </div>
+</div>
 
-	<?php
-    /**
-     * woocommerce_after_main_content hook.
-     *
-     * @hooked woocommerce_output_content_wrapper_end - 10 (outputs closing divs for the content)
-     */
-    // do_action('woocommerce_after_main_content');
-    ?>
-
-	<?php
-    /**
-     * woocommerce_sidebar hook.
-     *
-     * @hooked woocommerce_get_sidebar - 10
-     */
-    do_action('woocommerce_sidebar');
-    ?>
-
+<?php endwhile; // end of the loop. 
+?>
+</div>
 <?php
 get_footer('shop');
 

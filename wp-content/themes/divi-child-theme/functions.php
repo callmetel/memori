@@ -92,3 +92,33 @@ function premade_single_product_template_include($template)
 	}
 	return $template;
 }
+
+function rf_product_thumbnail_size($size)
+{
+	global $product;
+
+	$size = 'full';
+	return $size;
+}
+add_filter('woocommerce_gallery_image_size', 'rf_product_thumbnail_size');
+
+add_filter('woocommerce_get_image_size_gallery_thumbnail', function ($size) {
+	return array(
+		'width'  => 300,
+		'height' => 300,
+		'crop'   => 1,
+	);
+});
+
+add_filter('woocommerce_product_single_add_to_cart_text', 'product_cat_single_add_to_cart_button_text', 20, 1);
+function product_cat_single_add_to_cart_button_text($text)
+{
+	$text = __('Add to Bag', 'woocommerce');
+	// Only for a specific product category
+	if (has_term(array('cyob'), 'product_cat'))
+		$text = __('Create', 'woocommerce');
+
+	return $text;
+}
+
+remove_action('woocommerce_before_checkout_form', 'woocommerce_checkout_coupon_form', 10);
