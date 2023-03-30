@@ -102,8 +102,6 @@ jQuery(document).ready(function ($)
 
         document.getElementById("book_photos").addEventListener("change", (e) =>
         {
-            console.log("photo listener");
-            console.log(e);
             if (e.target.files.length == 0)
             {
                 $(".single-product-cyob .extra-options .book_photos_upload_link #upload-photos").removeClass("uploaded");
