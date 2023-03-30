@@ -37,8 +37,15 @@ jQuery(document).ready(function ($)
         checkStepValidity = (step) =>
         {
             if (step === "style")
+            {
                 console.log(document.querySelector('[name="book_cover"]').checkValidity() && document.querySelector('[name="book_title"]').checkValidity());
-            return document.querySelector('[name="book_cover"]').checkValidity() && document.querySelector('[name="book_title"]').checkValidity();
+                return document.querySelector('[name="book_cover"]').checkValidity() && document.querySelector('[name="book_title"]').checkValidity();
+            }
+            if (step === "build")
+            {
+                console.log(document.querySelector('[name="book_layout"]').checkValidity() && document.querySelector('[name="book_photos[]"]').checkValidity());
+                return document.querySelector('[name="book_layout"]').checkValidity() && document.querySelector('[name="book_photos[]"]').checkValidity();
+            }
         }
 
         changeStepItems = (step) =>
@@ -51,12 +58,21 @@ jQuery(document).ready(function ($)
                 $('#build-progress-btns .btn.next .complete').show();
                 $('#build-progress-btns .btn.next span:not(.complete)').hide();
             }
+            else
+            {
+                $('#build-progress-btns .btn.next .complete').hide();
+                $('#build-progress-btns .btn.next span:not(.complete)').show();
+            }
         }
 
         let currentActive = 1;
 
         next.addEventListener('click', () =>
         {
+            if ($('#build-progress-btns .btn.next .complete').is(":visible"))
+            {
+                $(".single_add_to_cart_button").trigger("click");
+            }
             scrollToTop();
             if (checkStepValidity(getActiveStep(currentActive)))
             {
@@ -68,10 +84,6 @@ jQuery(document).ready(function ($)
                 }
 
                 update(getActiveStep(currentActive));
-            }
-            else
-            {
-                $(".single_add_to_cart_button").trigger("click");
             }
         });
 
@@ -86,6 +98,20 @@ jQuery(document).ready(function ($)
             }
 
             update(getActiveStep(currentActive));
+        });
+
+        document.getElementById("book_photos").addEventListener("change", (e) =>
+        {
+            console.log("photo listener");
+            console.log(e);
+            if (e.target.files.length == 0)
+            {
+                $(".single-product-cyob .extra-options .book_photos_upload_link #upload-photos").removeClass("uploaded");
+            }
+            else
+            {
+                $(".single-product-cyob .extra-options .book_photos_upload_link #upload-photos").addClass("uploaded");
+            }
         });
 
         function update(step)
@@ -112,6 +138,8 @@ jQuery(document).ready(function ($)
                 prev.disabled = true;
             } else if (currentActive === circles.length)
             {
+                console.log(currentActive)
+                // $(".single_add_to_cart_button").trigger("click");
                 // next.disabled = true;
             } else
             {
@@ -125,6 +153,25 @@ jQuery(document).ready(function ($)
             e.preventDefault();
             $("input#book_photos").trigger("click");
         });
+
+        var book_title = document.getElementById('book_title');
+        var charlimit = 7; // char limit per line
+        book_title.onkeyup = function ()
+        {
+            var lines = book_title.value.split('\n');
+            for (var i = 0; i < lines.length; i++)
+            {
+                if (lines[i].length <= charlimit) continue;
+                var j = 0; space = charlimit;
+                while (j++ <= charlimit)
+                {
+                    if (lines[i].charAt(j) === ' ') space = j;
+                }
+                lines[i + 1] = lines[i].substring(space + 1) + (lines[i + 1] || "");
+                lines[i] = lines[i].substring(0, space);
+            }
+            book_title.value = lines.slice(0, 10).join('\n');
+        };
     }
 
     if ($(".single-product-premade").length > 0)
@@ -135,4 +182,11 @@ jQuery(document).ready(function ($)
             $(".single-product-premade .woocommerce-product-gallery .flex-control-thumbs").height(imageHeight);
         }).resize();
     }
+
+    // $(".single-product-cyob btn.next").click(function ())
+
+    $("body.woocommerce-cart div.shop_table .cart_item .product-quantity input.qty").change(function ()
+    {
+        $('body.woocommerce-cart div.shop_table button[name="update_cart"]').trigger("click");
+    });
 });
