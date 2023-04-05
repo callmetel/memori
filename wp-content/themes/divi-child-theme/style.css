@@ -1390,11 +1390,6 @@ body.woocommerce-checkout #payment {
  * Footer Styles
  */
 
-body:not(.home) #main-footer-subscribe,
-body:not(.home) #main-footer-products {
-  display: none !important;
-}
-
 #main-footer-subscribe,
 #main-footer-products,
 #main-footer-contact {
@@ -1537,6 +1532,16 @@ body:not(.home) #main-footer-products {
   #main-footer-menu .menu-item:nth-of-type(2):before,
   #main-footer-menu .menu-item:nth-of-type(2):after {
     display: none;
+  }
+}
+
+@media only screen and (max-width:767px) {
+
+  #main-footer-menu,
+  #main-footer-subscribe,
+  #main-footer-products,
+  #main-footer-contact {
+    padding: 0 !important;
   }
 }
 
