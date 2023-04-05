@@ -1470,6 +1470,7 @@ body.woocommerce-checkout #payment {
 
 #main-footer-menu #menu-footer {
   align-items: center;
+  text-transform: lowercase;
 }
 
 #main-footer-menu .menu-item a {
