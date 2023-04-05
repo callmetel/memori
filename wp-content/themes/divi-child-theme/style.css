@@ -190,7 +190,7 @@ h6,
     display: inline-block;
     width: 50px;
     height: 53px;
-    background-image: url(/wp-content/uploads/bag-icon.svg);
+    background-image: url(/memori/wp-content/uploads/bag-icon.svg);
     background-size: contain;
     background-repeat: no-repeat;
     line-height: 0;
@@ -772,23 +772,23 @@ body.single-product .woocommerce-message .message-inner {
 }
 
 .single-product-cyob .extra-options label[for="book_cover_nebula"]:before {
-  background-image: url("/wp-content/uploads/nebula.png");
+  background-image: url("/memori/wp-content/uploads/nebula.png");
 }
 
 .single-product-cyob .extra-options label[for="book_cover_crepe"]:before {
-  background-image: url("/wp-content/uploads/crepe.png");
+  background-image: url("/memori/wp-content/uploads/crepe.png");
 }
 
 .single-product-cyob .extra-options label[for="book_cover_roma"]:before {
-  background-image: url("/wp-content/uploads/roma.png");
+  background-image: url("/memori/wp-content/uploads/roma.png");
 }
 
 .single-product-cyob .extra-options label[for="book_cover_mercurial"]:before {
-  background-image: url("/wp-content/uploads/mercurial.png");
+  background-image: url("/memori/wp-content/uploads/mercurial.png");
 }
 
 .single-product-cyob .extra-options label[for="book_cover_au_lait"]:before {
-  background-image: url("/wp-content/uploads/au_lait.png");
+  background-image: url("/memori/wp-content/uploads/au_lait.png");
 }
 
 .single-product-cyob .extra-options label[for*="book_cover_"] span {
@@ -894,7 +894,7 @@ body.single-product .woocommerce-message .message-inner {
   width: 40px;
   height: 40px;
   position: absolute;
-  background-image: url("/wp-content/uploads/check.svg");
+  background-image: url("/memori/wp-content/uploads/check.svg");
   background-size: contain;
   background-repeat: no-repeat;
   right: -60px;
