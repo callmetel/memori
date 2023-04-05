@@ -1135,6 +1135,8 @@ body.woocommerce-checkout #cpsw-payment-request-wrapper .cpsw-payment-request-cu
 body.woocommerce-checkout #ship-to-different-address {
   display: block !important;
   font-size: 20px;
+  text-align: center;
+  margin: 10px 0;
 }
 
 .woocommerce #payment #place_order,
