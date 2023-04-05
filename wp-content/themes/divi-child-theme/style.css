@@ -1446,7 +1446,8 @@ body:not(.home) #main-footer-products {
 #main-footer-subscribe .et_pb_newsletter_button.et_pb_button:after {
   font-weight: 400 !important;
   font-size: 40px !important;
-  top: 18%;
+  top: 0;
+  line-height: 1.18;
   right: 5px !important;
   margin: 0 !important;
 
