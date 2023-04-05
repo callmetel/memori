@@ -1120,7 +1120,7 @@ body.woocommerce-checkout div.thwmscf-tab-panels form {
 }
 
 body.woocommerce-checkout div.thwmscf-tab-panel h3,
-body.woocommerce-checkout div.thwmscf-tab-panel label {
+body.woocommerce-checkout div.thwmscf-tab-panel .form-row>label {
   display: none;
 }
 
