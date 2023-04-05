@@ -1071,7 +1071,7 @@ body.woocommerce-checkout li.thwmscf-tab:after {
   position: absolute;
   width: 50%;
   height: 4px;
-  background: #bdb09b;
+  background: #8c8272;
   top: 0;
   right: 0;
   z-index: 0;
@@ -1088,7 +1088,7 @@ body.woocommerce-checkout li.thwmscf-tab:nth-of-type(3):after {
 body.woocommerce-checkout li.thwmscf-tab a .thwmscf-tab-icon {
   background: var(--lighttan);
   color: var(--lighttan);
-  border-color: #bdb09b;
+  border-color: #8c8272;
   border-width: 3px;
   width: 40px;
   height: 40px;
