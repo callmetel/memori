@@ -1386,9 +1386,9 @@ body.woocommerce-checkout #payment {
   }
 }
 
-/*--------------------------------------------*/
-/*-----------------[FOOTER]-------------------*/
-/*--------------------------------------------*/
+/**
+ * Footer Styles
+ */
 
 body:not(.home) #main-footer-subscribe,
 body:not(.home) #main-footer-products {
@@ -1443,7 +1443,7 @@ body:not(.home) #main-footer-products {
   font-size: 0;
 }
 
-body #page-container .et_pb_section .et_pb_signup_0_tb_footer#main-footer-subscribe.et_pb_subscribe .et_pb_newsletter_button.et_pb_button:after {
+#main-footer-subscribe .et_pb_newsletter_button.et_pb_button:after {
   font-weight: 400 !important;
   font-size: 40px !important;
   top: 18%;
