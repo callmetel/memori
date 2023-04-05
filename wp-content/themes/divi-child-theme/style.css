@@ -1476,6 +1476,7 @@ body.woocommerce-checkout #payment {
   display: inline-block;
   font-size: 25px;
   line-height: normal;
+  margin-top: -10px;
 }
 
 #main-footer-menu .menu-item:nth-of-type(2):before {
