@@ -1543,6 +1543,10 @@ body.woocommerce-checkout #payment {
   #main-footer-contact {
     padding: 0 !important;
   }
+
+  #main-footer-contact .et_pb_row:first-of-type {
+    padding: 0 !important;
+  }
 }
 
 /*------------------------------------------------*/
