@@ -1216,7 +1216,7 @@ body.woocommerce-checkout form #billing_country_field {
 }
 
 body.woocommerce-checkout form #billing_country_field::before {
-  content: "Shipping Address";
+  content: "Billing Address";
   color: #8D8686;
   text-align: center;
   display: block;
