@@ -64,7 +64,7 @@ get_header('shop');
                                 <div class="inner">
                                     <?php echo $product->description; ?>
                                     <a class="et_pb_button shop-product-button et_pb_bg_layout_light" href="<?php the_permalink($id); ?>">
-                                        <?php echo $id === 64 ? "Create" : "Explore"; ?>
+                                        <?php echo has_term(array('cyob'), 'product_cat') ? "Create" : "Explore"; ?>
                                     </a>
                                 </div>
                             </div>

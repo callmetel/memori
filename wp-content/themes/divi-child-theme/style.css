@@ -162,6 +162,7 @@ h6,
   #main-header #top-menu {
     display: flex;
     align-items: center;
+    justify-content: space-between;
   }
 
   #main-header .menu-item.left {
@@ -368,7 +369,7 @@ h6,
 .woocommerce .woocommerce-info,
 .woocommerce .woocommerce-message,
 body.single-product .woocommerce-message .message-inner {
-  background-color: var(--darkgray);
+  background-color: var(--darkgray) !important;
   border-radius: 18px;
 }
 
@@ -741,6 +742,7 @@ body.single-product .woocommerce-message .message-inner {
 .single-product-cyob .extra-options .label-tag {
   font-size: 2.5vw;
   font-weight: 400;
+  text-transform: lowercase;
 }
 
 .single-product-cyob .extra-options .label-tag .required {
@@ -1060,6 +1062,29 @@ body.woocommerce-checkout h1.entry-title {
   display: none;
 }
 
+body.woocommerce-checkout li.thwmscf-tab {
+  position: relative;
+}
+
+body.woocommerce-checkout li.thwmscf-tab:after {
+  content: "";
+  position: absolute;
+  width: 50%;
+  height: 4px;
+  background: #bdb09b;
+  top: 0;
+  right: 0;
+  z-index: 0;
+}
+
+body.woocommerce-checkout li.thwmscf-tab:nth-of-type(2):after {
+  width: 100%;
+}
+
+body.woocommerce-checkout li.thwmscf-tab:nth-of-type(3):after {
+  right: 50%;
+}
+
 body.woocommerce-checkout li.thwmscf-tab a .thwmscf-tab-icon {
   background: var(--lighttan);
   color: var(--lighttan);
@@ -1069,6 +1094,7 @@ body.woocommerce-checkout li.thwmscf-tab a .thwmscf-tab-icon {
   height: 40px;
   margin-top: -33px;
   font-size: 0;
+  z-index: 1;
 }
 
 body.woocommerce-checkout li.thwmscf-tab a.active .thwmscf-tab-icon {
@@ -1433,6 +1459,10 @@ body #page-container .et_pb_section .et_pb_signup_0_tb_footer#main-footer-subscr
 #main-footer-products-title h2,
 #main-footer-contact-us-title h2 {
   font-weight: 400;
+}
+
+#main-footer-menu #menu-footer {
+  align-items: center;
 }
 
 #main-footer-menu .menu-item a {
