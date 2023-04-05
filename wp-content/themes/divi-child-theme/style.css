@@ -1128,6 +1128,15 @@ body.woocommerce-checkout .thwmscf-wrapper .thwmscf-buttons {
   text-align: center;
 }
 
+body.woocommerce-checkout #cpsw-payment-request-wrapper .cpsw-payment-request-custom-button-render {
+  max-height: unset !important;
+}
+
+body.woocommerce-checkout #ship-to-different-address {
+  display: block !important;
+  font-size: 20px;
+}
+
 .woocommerce #payment #place_order,
 .woocommerce-page #payment #place_order,
 body.woocommerce-checkout .thwmscf-wrapper .thwmscf-buttons input[type=button] {
