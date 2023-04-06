@@ -159,9 +159,9 @@ function create_pdf()
 			$pdf_data = wp_remote_retrieve_body($response);
 			$pdf_name = $data["pdfName"] . bin2hex(random_bytes(16)) . ".pdf";
 			$pdf_location = "tmppdfs/" . $pdf_name;
-			file_put_contents(ABSPATH . DIRECTORY_SEPARATOR . "memori" . DIRECTORY_SEPARATOR . $pdf_location, $pdf_data);
+			file_put_contents(ABSPATH . DIRECTORY_SEPARATOR . $pdf_location, $pdf_data);
 
-			$pdf_url = get_base_url() . DIRECTORY_SEPARATOR . "memori" . DIRECTORY_SEPARATOR . $pdf_location;
+			$pdf_url = get_base_url() . DIRECTORY_SEPARATOR . $pdf_location;
 			wp_send_json_success($pdf_url);
 		} else {
 			wp_send_json_error(wp_remote_retrieve_body($response), 800);
@@ -210,11 +210,11 @@ function add_tmpimgs()
 				$file["tmp_name"],
 
 				// New image location
-				ABSPATH . DIRECTORY_SEPARATOR . "memori" . DIRECTORY_SEPARATOR . $image_location
+				ABSPATH . DIRECTORY_SEPARATOR . $image_location
 			);
 
 			// Add image link to image_links array
-			$image_url = get_base_url() . DIRECTORY_SEPARATOR . "memori" . DIRECTORY_SEPARATOR . $image_location;
+			$image_url = get_base_url() . DIRECTORY_SEPARATOR . $image_location;
 			$image_links["img" . $file_index] = $image_url;
 			$file_index++;
 		}
@@ -227,7 +227,7 @@ add_action('wp_ajax_nopriv_add_tmpimgs', 'add_tmpimgs');
 // Delete File from Server
 function purge_tmpimgs()
 {
-	$folderpath = ABSPATH . DIRECTORY_SEPARATOR . "memori" . DIRECTORY_SEPARATOR . 'tmpimgs';
+	$folderpath = ABSPATH . DIRECTORY_SEPARATOR . 'tmpimgs';
 	$files = glob($folderpath . '/*');
 
 	// Deleting all the files in the list
