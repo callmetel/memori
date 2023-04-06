@@ -122,3 +122,98 @@ function product_cat_single_add_to_cart_button_text($text)
 }
 
 remove_action('woocommerce_before_checkout_form', 'woocommerce_checkout_coupon_form', 10);
+
+function create_pdf()
+{
+	// Get Payload & Endpoint
+	$data = $_POST;
+	$endpoint = $data["endpoint"];
+	$payload = str_replace('\\', '', $data["payload"]);
+	$api_key = "axxqpS5i10noxSzIk2RgYiVPfPXmr0xE";
+	$headers = array(
+		'Content-Type' => 'application/json',
+		'Authorization' => 'Basic ' . base64_encode($api_key)
+	);
+
+	$response = wp_safe_remote_post($endpoint, array(
+		'timeout' => 240,
+		'redirection' => 10,
+		'httpversion' => '1.1',
+		'headers' => $headers,
+		'body' => $payload
+	));
+
+	if (is_wp_error($response)) {
+		wp_send_json_error('Something went wrong');
+	} else {
+		// TODO: Create PDF & place in tmppdfs/ dir. Then send pdf link in response
+		if (mb_detect_encoding($response["body"], null, true) === false) {
+			wp_send_json_success(base64_encode(wp_remote_retrieve_body($response)));
+		} else {
+			wp_send_json_error(wp_remote_retrieve_body($response), 800);
+		}
+	}
+	die();
+}
+add_action('wp_ajax_create_pdf', 'create_pdf');
+add_action('wp_ajax_nopriv_create_pdf', 'create_pdf');
+
+// Upload Images To Media Folder
+function add_tmpimgs()
+{
+	// TODO: Get all input files from $_POST $_FILES & add them to tmpimgs/ dir
+	$input_name = array_key_first($_FILES);
+	$image_file = $_FILES[$input_name];
+
+	// Exit if no file uploaded
+	if (!isset($image_file)) {
+		die('No file uploaded.');
+	}
+
+	// Exit if image file is zero bytes
+	if (filesize($image_file["tmp_name"]) <= 0) {
+		die('Uploaded file has no contents.');
+	}
+
+	// Exit if is not a valid image file
+	$image_type = exif_imagetype($image_file["tmp_name"]);
+	if (!$image_type) {
+		die('Uploaded file is not an image.');
+	}
+
+	// Get file extension based on file type, to prepend a dot we pass true as the second parameter
+	$image_extension = image_type_to_extension($image_type, true);
+
+	// Create a unique image name
+	$image_name = bin2hex(random_bytes(16)) . $image_extension;
+
+	// Move the temp image file to the images directory
+	move_uploaded_file(
+		// Temp image location
+		$image_file["tmp_name"],
+
+		// New image location
+		ABSPATH . DIRECTORY_SEPARATOR . 'tmpimgs/' . $image_name
+	);
+	return wp_send_json_success(array("response" => "Image File (" . $image_name . ") Uploaded", "file" => $image_name));
+}
+add_action('wp_ajax_add_tmpimgs', 'add_tmpimgs');
+add_action('wp_ajax_nopriv_add_tmpimgs', 'add_tmpimgs');
+
+// Delete File from Server
+function purge_tmpimgs()
+{
+	$folderpath = ABSPATH . DIRECTORY_SEPARATOR . 'tmpimgs';
+	$files = glob($folderpath . '/*');
+
+	// Deleting all the files in the list
+	foreach ($files as $file) {
+
+		if (is_file($file))
+
+			// Delete the given file
+			unlink($file);
+	}
+}
+add_action('wp_ajax_purge_tmpimgs', 'purge_tmpimgs');
+add_action('wp_ajax_nopriv_purge_tmpimgs', 'purge_tmpimgs');

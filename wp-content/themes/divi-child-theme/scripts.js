@@ -181,10 +181,188 @@ jQuery(document).ready(function ($)
         }).resize();
     }
 
-    // $(".single-product-cyob btn.next").click(function ())
-
     $("body.woocommerce-cart div.shop_table .cart_item .product-quantity input.qty").change(function ()
     {
         $('body.woocommerce-cart div.shop_table button[name="update_cart"]').trigger("click");
+    });
+
+    const createPDF = (payload, endpoint, pdfName, successFn, el = null, autoDownload = true) =>
+    {
+        payload = typeof payload === "object" ? JSON.stringify(payload) : payload;
+        $.ajax({
+            type: "POST",
+            url: thryvSettings.ajaxurl,
+            data:
+                "&payload=" +
+                encodeURIComponent(payload) +
+                "&endpoint=" +
+                endpoint +
+                "&action=create_pdf",
+            success: function (response)
+            {
+                // TODO: Move pdf creation to PHP, Receive status & link from ajax response
+                // console.log(response);
+                if (response.success)
+                {
+                    // convert to response base64 encoding
+                    var binaryString = window.atob(response.data);
+                    var binaryLen = binaryString.length;
+                    var bytes = new Uint8Array(binaryLen);
+
+                    for (var i = 0; i < binaryLen; i++)
+                    {
+                        var ascii = binaryString.charCodeAt(i);
+                        bytes[i] = ascii;
+                    }
+
+                    // create a download anchor tag
+                    var downloadLink =
+                        el == null
+                            ? document.createElement("a")
+                            : document.querySelector(el);
+                    downloadLink.target = "_blank";
+                    downloadLink.download = pdfName + ".pdf";
+
+                    // convert downloaded data to a Blob
+                    var blob = new Blob([bytes], {
+                        type: "application/pdf",
+                    });
+
+                    // create an object URL from the Blob
+                    var URL = window.URL || window.webkitURL;
+                    var downloadUrl = URL.createObjectURL(blob);
+
+                    // set object URL as the anchor's href
+                    downloadLink.href = downloadUrl;
+
+                    // add element to body if none exists
+                    if (el == null)
+                    {
+                        document.body.appendChild(downloadLink);
+                    }
+
+                    // fire a click event on the anchor if auto download enabled
+                    if (autoDownload)
+                    {
+                        downloadLink.click();
+                    }
+
+                    successFn(downloadLink.href);
+                } else
+                {
+                    console.log(response);
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown)
+            {
+                console.log(
+                    Object.entries(jqXHR) + " | " + textStatus + " | " + errorThrown
+                );
+            },
+        });
+    };
+
+    const addTmpImgs = (form, callback) =>
+    {
+        // can be form data or element name
+        let form_data =
+            typeof form === "object"
+                ? form
+                : new FormData(document.querySelector(form));
+        $.ajax({
+            type: "POST",
+            url: thryvSettings.ajaxurl + "?action=add_tmpimgs",
+            data: form_data,
+            processData: false,
+            contentType: false,
+        })
+            .done(function (response)
+            {
+                // console.log(response);
+                let filename = response["data"]["file"];
+                let link = window.location.origin + "/media/" + filename;
+                callback(link, filename);
+            })
+            .fail(function (response)
+            {
+                console.log(response);
+            });
+    };
+
+    const purgeTmpImgs = (callback = function () { }) =>
+    {
+        $.ajax({
+            type: "POST",
+            url: thryvSettings.ajaxurl,
+            data: "action=purge_tmpimgs",
+            success: function (response)
+            {
+                // console.log(response);
+                callback();
+            },
+            error: function (response)
+            {
+                console.log(response);
+            },
+        });
+    };
+
+    $("#create-pdf").click(function (e)
+    {
+        addTmpImgs(
+            "#invoice-form-generator",
+            function (link)
+            {
+                // TODO: For each link/filename add to array for images & convert array to JSON
+                let payload = {
+                    title: "Photobook Example",
+                    fontSize: 10,
+                    textColor: "#333333",
+                    data: {
+                        img1: "https://placekitten.com/800/838",
+                        img2: "https://placekitten.com/800/1000",
+                        img3: "https://placekitten.com/800/1000",
+                        img4: "https://placekitten.com/800/1000",
+                        img5: "https://placekitten.com/800/1000",
+                        img6: "https://placekitten.com/800/716",
+                        img7: "https://placekitten.com/800/718",
+                        img8: "https://placekitten.com/800/452",
+                        img9: "https://placekitten.com/800/434",
+                        img10: "https://placekitten.com/800/905",
+                        img11: "https://placekitten.com/800/1000",
+                        img12: "https://placekitten.com/800/1000",
+                        img13: "https://placekitten.com/800/1000",
+                        img14: "https://placekitten.com/800/875",
+                        img15: "https://placekitten.com/800/875",
+                        img16: "https://placekitten.com/800/781",
+                        img17: "https://placekitten.com/800/783",
+                        img18: "https://placekitten.com/800/1000",
+                        img19: "https://placekitten.com/800/505",
+                        img20: "https://placekitten.com/800/504",
+                        img21: "https://placekitten.com/800/1000",
+                        img22: "https://placekitten.com/800/1000",
+                        img23: "https://placekitten.com/800/770",
+                        img24: "https://placekitten.com/800/996",
+                        img25: "https://placekitten.com/800/1000",
+                        img26: "https://placekitten.com/800/1000",
+                        img27: "https://placekitten.com/800/733",
+                        img28: "https://placekitten.com/800/735",
+                        img29: "https://placekitten.com/800/1000",
+                        img30: "https://placekitten.com/800/1000",
+                        img31: "https://placekitten.com/800/804"
+                    }
+                };
+                console.log(payload);
+                createPDF(
+                    JSON.stringify(payload),
+                    "https://app.useanvil.com/api/v1/fill/BtCm6RuGVTqsizG9w9oT.pdf",
+                    "pdfSample",
+                    function ()
+                    {
+                        purgeTmpImgs();
+                    }
+                );
+            }
+        );
     });
 });
