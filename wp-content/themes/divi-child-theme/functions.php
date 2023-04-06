@@ -123,6 +123,15 @@ function product_cat_single_add_to_cart_button_text($text)
 
 remove_action('woocommerce_before_checkout_form', 'woocommerce_checkout_coupon_form', 10);
 
+function get_base_url()
+{
+	$link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS']
+		=== 'on' ? "https" : "http") .
+		"://" . $_SERVER['HTTP_HOST'];
+
+	return $link;
+}
+
 function create_pdf()
 {
 	// Get Payload & Endpoint
@@ -146,9 +155,14 @@ function create_pdf()
 	if (is_wp_error($response)) {
 		wp_send_json_error('Something went wrong');
 	} else {
-		// TODO: Create PDF & place in tmppdfs/ dir. Then send pdf link in response
 		if (mb_detect_encoding($response["body"], null, true) === false) {
-			wp_send_json_success(base64_encode(wp_remote_retrieve_body($response)));
+			$pdf_data = wp_remote_retrieve_body($response);
+			$pdf_name = $data["pdfName"] . bin2hex(random_bytes(16)) . ".pdf";
+			$pdf_location = "tmppdfs/" . $pdf_name;
+			file_put_contents(ABSPATH . DIRECTORY_SEPARATOR . $pdf_location, $pdf_data);
+
+			$pdf_url = get_base_url() . DIRECTORY_SEPARATOR . $pdf_location;
+			wp_send_json_success($pdf_url);
 		} else {
 			wp_send_json_error(wp_remote_retrieve_body($response), 800);
 		}
@@ -158,44 +172,56 @@ function create_pdf()
 add_action('wp_ajax_create_pdf', 'create_pdf');
 add_action('wp_ajax_nopriv_create_pdf', 'create_pdf');
 
+function reArrayFiles(&$file_post)
+{
+
+	$file_ary = array();
+	$file_count = count($file_post['name']);
+	$file_keys = array_keys($file_post);
+
+	for ($i = 0; $i < $file_count; $i++) {
+		foreach ($file_keys as $key) {
+			$file_ary[$i][$key] = $file_post[$key][$i];
+		}
+	}
+
+	return $file_ary;
+}
+
 // Upload Images To Media Folder
 function add_tmpimgs()
 {
 	// TODO: Get all input files from $_POST $_FILES & add them to tmpimgs/ dir
+
 	$input_name = array_key_first($_FILES);
 	$image_file = $_FILES[$input_name];
+	$image_links = [];
 
-	// Exit if no file uploaded
-	if (!isset($image_file)) {
-		die('No file uploaded.');
+	if ($image_file) {
+		$file_ary = reArrayFiles($image_file);
+		$file_index = 1;
+
+		foreach ($file_ary as $file) {
+
+			// Get file extension based on file type, to prepend a dot we pass true as the second parameter
+			$image_location = 'tmpimgs/' . $file["name"];
+
+			// Move the temp image file to the images directory
+			move_uploaded_file(
+				// Temp image location
+				$file["tmp_name"],
+
+				// New image location
+				ABSPATH . DIRECTORY_SEPARATOR . $image_location
+			);
+
+			// Add image link to image_links array
+			$image_url = get_base_url() . DIRECTORY_SEPARATOR . $image_location;
+			$image_links["img" . $file_index] = $image_url;
+			$file_index++;
+		}
 	}
-
-	// Exit if image file is zero bytes
-	if (filesize($image_file["tmp_name"]) <= 0) {
-		die('Uploaded file has no contents.');
-	}
-
-	// Exit if is not a valid image file
-	$image_type = exif_imagetype($image_file["tmp_name"]);
-	if (!$image_type) {
-		die('Uploaded file is not an image.');
-	}
-
-	// Get file extension based on file type, to prepend a dot we pass true as the second parameter
-	$image_extension = image_type_to_extension($image_type, true);
-
-	// Create a unique image name
-	$image_name = bin2hex(random_bytes(16)) . $image_extension;
-
-	// Move the temp image file to the images directory
-	move_uploaded_file(
-		// Temp image location
-		$image_file["tmp_name"],
-
-		// New image location
-		ABSPATH . DIRECTORY_SEPARATOR . 'tmpimgs/' . $image_name
-	);
-	return wp_send_json_success(array("response" => "Image File (" . $image_name . ") Uploaded", "file" => $image_name));
+	return wp_send_json_success($image_links);
 }
 add_action('wp_ajax_add_tmpimgs', 'add_tmpimgs');
 add_action('wp_ajax_nopriv_add_tmpimgs', 'add_tmpimgs');
