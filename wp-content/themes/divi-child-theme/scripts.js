@@ -99,7 +99,7 @@ jQuery(document).ready(function ($)
                             "pdfSample",
                             function ()
                             {
-                                // purgeTmpImgs();
+                                purgeTmpImgs();
                             }
                         );
                     });
