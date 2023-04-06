@@ -129,7 +129,7 @@ function get_base_url()
 		=== 'on' ? "https" : "http") .
 		"://" . $_SERVER['HTTP_HOST'];
 
-	return $link;
+	return $link . "/memori";
 }
 
 function create_pdf()
