@@ -97,9 +97,11 @@ jQuery(document).ready(function ($)
                             JSON.stringify(payload),
                             "https://app.useanvil.com/api/v1/fill/BtCm6RuGVTqsizG9w9oT.pdf",
                             "pdfSample",
-                            function ()
+                            function (pdfLink)
                             {
                                 purgeTmpImgs();
+                                $("#book_preview_link").val(pdfLink);
+                                $("#book_preview").html("<iframe src='" + pdfLink + "'></iframe>");
                             }
                         );
                     });
