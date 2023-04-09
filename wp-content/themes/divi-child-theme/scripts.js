@@ -101,7 +101,7 @@ jQuery(document).ready(function ($)
                             {
                                 purgeTmpImgs();
                                 $("#book_preview_link").val(pdfLink);
-                                $("#book_preview").html("<iframe src='" + pdfLink + "'></iframe>");
+                                $(".book_preview.complete").html("<iframe src='" + pdfLink + "'></iframe>");
                             }
                         );
                     });
