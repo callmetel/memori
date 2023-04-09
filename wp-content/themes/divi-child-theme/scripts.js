@@ -234,7 +234,7 @@ jQuery(document).ready(function ($)
                 console.log(response);
                 if (response.success)
                 {
-                    successFn();
+                    successFn(response.data);
                 }
             },
             error: function (jqXHR, textStatus, errorThrown)
