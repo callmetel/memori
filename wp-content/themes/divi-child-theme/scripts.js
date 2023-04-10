@@ -3,6 +3,13 @@ jQuery(document).ready(function ($)
     const isDevEnv = window.location.origin.includes("localhost") ? true : false;
     if ($(".single-product-cyob").length > 0)
     {
+        var adobeDCView;
+        document.addEventListener("adobe_dc_view_sdk.ready", function ()
+        {
+            adobeDCView = new AdobeDC.View({ clientId: "f44110d565ce4a4ca07fe046c46dd494", divId: "adobe-dc-view" });
+            console.log("adobedc view set");
+        });
+
         $("body.single-product .extra-options tr:not(.style)").hide();
         $('body.single-product .extra-options label[for*="book_cover_"]').each(function ()
         {
@@ -113,14 +120,12 @@ jQuery(document).ready(function ($)
                                 $("#build-progress-btns .btn.next").removeAttr("disabled");
                                 purgeTmpImgs();
                                 $("#book_preview_link").val(pdfLink);
-                                document.addEventListener("adobe_dc_view_sdk.ready", function ()
-                                {
-                                    var adobeDCView = new AdobeDC.View({ clientId: "f44110d565ce4a4ca07fe046c46dd494", divId: "book-preview" });
-                                    adobeDCView.previewFile({
-                                        content: { location: { url: pdfLink } },
-                                        metaData: { fileName: pdfName + ".pdf" }
-                                    }, { embedMode: "IN_LINE", showDownloadPDF: false, showPrintPDF: false });
-                                });
+
+                                adobeDCView.previewFile({
+                                    content: { location: { url: pdfLink } },
+                                    metaData: { fileName: pdfName + ".pdf" }
+                                }, { embedMode: "IN_LINE", showDownloadPDF: false, showPrintPDF: false });
+                                console.log("adobe pdf called");
                             }
                         );
                     });
