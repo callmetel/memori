@@ -118,7 +118,7 @@ jQuery(document).ready(function ($)
 
                                 if (window.AdobeDC)
                                 {
-                                    var adobeDCView = new AdobeDC.View({ clientId: "f44110d565ce4a4ca07fe046c46dd494", divId: "book-preview" });
+                                    var adobeDCView = new AdobeDC.View({ clientId: "ae0891e08ac249d999d65c5f1532d50b", divId: "book-preview" });
                                     adobeDCView.previewFile({
                                         content: { location: { url: pdfLink } },
                                         metaData: { fileName: pdfName + ".pdf" }
