@@ -120,18 +120,27 @@ jQuery(document).ready(function ($)
                                     var adobeDCView = new AdobeDC.View({ clientId: "ae0891e08ac249d999d65c5f1532d50b", divId: "book-preview" });
                                     adobeDCView.previewFile({
                                         content: { location: { url: pdfLink } },
-                                        metaData: { fileName: pdfName + ".pdf" }
+                                        metaData: { fileName: pdfName + ".pdf", hasReadOnlyAccess: true }
                                     }, {
                                         defaultViewMode: "TWO_COLUMN_FIT_PAGE", showAnnotationTools: false, showDownloadPDF: false,
                                         showPrintPDF: false
                                     });
 
+                                    const eventOptions = {
+                                        //Pass the PDF analytics events to receive.
+                                        //If no event is passed in listenOn, then all PDF analytics events will be received.
+                                        listenOn: [AdobeDC.View.Enum.PDFAnalyticsEvents.PAGE_VIEW, AdobeDC.View.Enum.PDFAnalyticsEvents.DOCUMENT_OPEN],
+                                        enablePDFAnalytics: true
+                                    }
+
                                     adobeDCView.registerCallback(
-                                        AdobeDC.View.Enum.CallbackType.DOCUMENT_OPEN,
+                                        AdobeDC.View.Enum.CallbackType.EVENT_LISTENER,
                                         function (event)
                                         {
                                             console.log("pdf opened");
                                             $(".book_preview.complete").removeClass("loading");
+                                            console.log("Type " + event.type);
+                                            console.log("Data " + event.data);
                                         }, eventOptions
                                     );
                                 }

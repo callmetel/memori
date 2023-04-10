@@ -940,9 +940,11 @@ body.single-product .woocommerce-message .message-inner {
   transform: translate(-50%, calc(-50% + 60px));
 }
 
-.single-product-cyob tr.book_preview.complete.container>td.text-cell {
+.single-product-cyob tr.book_preview>td.text-cell {
   height: 100%;
   flex-grow: 1;
+  position: relative;
+  z-index: 9999;
 }
 
 .single-product-cyob tr.book_preview.complete.container #book-preview {
