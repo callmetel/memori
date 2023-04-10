@@ -1,15 +1,14 @@
 jQuery(document).ready(function ($)
 {
     const isDevEnv = window.location.origin.includes("localhost") ? true : false;
+    var adobeDCView;
+    document.addEventListener("adobe_dc_view_sdk.ready", function ()
+    {
+        adobeDCView = new AdobeDC.View({ clientId: "f44110d565ce4a4ca07fe046c46dd494", divId: "adobe-dc-view" });
+        console.log("adobedc view set");
+    });
     if ($(".single-product-cyob").length > 0)
     {
-        var adobeDCView;
-        document.addEventListener("adobe_dc_view_sdk.ready", function ()
-        {
-            adobeDCView = new AdobeDC.View({ clientId: "f44110d565ce4a4ca07fe046c46dd494", divId: "adobe-dc-view" });
-            console.log("adobedc view set");
-        });
-
         $("body.single-product .extra-options tr:not(.style)").hide();
         $('body.single-product .extra-options label[for*="book_cover_"]').each(function ()
         {
