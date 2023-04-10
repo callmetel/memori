@@ -82,6 +82,7 @@ jQuery(document).ready(function ($)
             {
                 if (getActiveStep(currentActive) === "build")
                 {
+                    $(".book_preview.complete").addClass("loading");
                     addTmpImgs("#cyob-form", function (links)
                     {
                         let image_links = JSON.stringify(links);
@@ -94,8 +95,6 @@ jQuery(document).ready(function ($)
                             data: links
                         };
                         console.log(payload);
-
-                        $(".book_preview.complete").addClass("loading");
 
                         var disableAddToCart = setInterval(() =>
                         {
@@ -126,7 +125,15 @@ jQuery(document).ready(function ($)
                                         defaultViewMode: "TWO_COLUMN_FIT_PAGE", showAnnotationTools: false, showDownloadPDF: false,
                                         showPrintPDF: false
                                     });
-                                    console.log("adobe pdf api called");
+
+                                    adobeDCView.registerCallback(
+                                        AdobeDC.View.Enum.CallbackType.DOCUMENT_OPEN,
+                                        function (event)
+                                        {
+                                            console.log("pdf opened");
+                                            $(".book_preview.complete").removeClass("loading");
+                                        }, eventOptions
+                                    );
                                 }
                             }
                         );
