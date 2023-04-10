@@ -93,15 +93,34 @@ jQuery(document).ready(function ($)
                         };
                         console.log(payload);
 
+                        $(".book_preview.complete").addClass("loading");
+
+                        var disableAddToCart = setInterval(() =>
+                        {
+                            if (getActiveStep(currentActive) === "complete" && $("#book_preview_link").val() == "")
+                            {
+                                $("#build-progress-btns .btn.next").attr("disabled", "disabled");
+                            }
+                        }, 50);
+
                         createPDF(
                             JSON.stringify(payload),
                             "https://app.useanvil.com/api/v1/fill/BtCm6RuGVTqsizG9w9oT.pdf",
                             "pdfSample",
-                            function (pdfLink)
+                            function (pdfLink, pdfName)
                             {
+                                clearInterval(disableAddToCart);
+                                $("#build-progress-btns .btn.next").removeAttr("disabled");
                                 purgeTmpImgs();
                                 $("#book_preview_link").val(pdfLink);
-                                $(".book_preview.complete").html("<iframe src='" + pdfLink + "'></iframe>");
+                                document.addEventListener("adobe_dc_view_sdk.ready", function ()
+                                {
+                                    var adobeDCView = new AdobeDC.View({ clientId: "f44110d565ce4a4ca07fe046c46dd494", divId: "book-preview" });
+                                    adobeDCView.previewFile({
+                                        content: { location: { url: pdfLink } },
+                                        metaData: { fileName: pdfName + ".pdf" }
+                                    }, { embedMode: "IN_LINE", showDownloadPDF: false, showPrintPDF: false });
+                                });
                             }
                         );
                     });
@@ -234,7 +253,7 @@ jQuery(document).ready(function ($)
                 console.log(response);
                 if (response.success)
                 {
-                    successFn(response.data);
+                    successFn(response.data, pdfName);
                 }
             },
             error: function (jqXHR, textStatus, errorThrown)

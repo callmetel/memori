@@ -11,10 +11,10 @@ function theme_enqueue_styles()
 	wp_enqueue_style('parent-style', get_template_directory_uri() . '/style.css');
 }
 
-// Remove Disable jQuery
 function load_custom_scripts()
 {
 	wp_enqueue_script('divi-child-js', get_stylesheet_directory_uri() . '/scripts.js', array("jquery"), fileVer("scripts.js"), true);
+	wp_enqueue_script('adobe-pdf-js', 'https://documentservices.adobe.com/view-sdk/viewer.js', array("jquery"), "", true);
 }
 if (!is_admin()) {
 	add_action('wp_enqueue_scripts', 'load_custom_scripts', 99);

@@ -92,7 +92,7 @@ get_header('shop'); ?>
 	?>
 </div>
 
-
+<script></script>
 <?php
 get_footer('shop');
 
