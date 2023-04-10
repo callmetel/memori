@@ -1,12 +1,6 @@
 jQuery(document).ready(function ($)
 {
     const isDevEnv = window.location.origin.includes("localhost") ? true : false;
-    var adobeDCView;
-    document.addEventListener("adobe_dc_view_sdk.ready", function ()
-    {
-        adobeDCView = new AdobeDC.View({ clientId: "f44110d565ce4a4ca07fe046c46dd494", divId: "adobe-dc-view" });
-        console.log("adobedc view set");
-    });
     if ($(".single-product-cyob").length > 0)
     {
         $("body.single-product .extra-options tr:not(.style)").hide();
@@ -65,11 +59,13 @@ jQuery(document).ready(function ($)
             {
                 $('#build-progress-btns .btn.next .complete').show();
                 $('#build-progress-btns .btn.next span:not(.complete)').hide();
+                $("#build-progress-btns .btn.next").attr("disabled", "disabled");
             }
             else
             {
                 $('#build-progress-btns .btn.next .complete').hide();
                 $('#build-progress-btns .btn.next span:not(.complete)').show();
+                $("#build-progress-btns .btn.next").removeAttr("disabled", "disabled");
             }
         }
 
@@ -120,11 +116,15 @@ jQuery(document).ready(function ($)
                                 purgeTmpImgs();
                                 $("#book_preview_link").val(pdfLink);
 
-                                adobeDCView.previewFile({
-                                    content: { location: { url: pdfLink } },
-                                    metaData: { fileName: pdfName + ".pdf" }
-                                }, { embedMode: "IN_LINE", showDownloadPDF: false, showPrintPDF: false });
-                                console.log("adobe pdf called");
+                                if (window.AdobeDC)
+                                {
+                                    var adobeDCView = new AdobeDC.View({ clientId: "f44110d565ce4a4ca07fe046c46dd494", divId: "book-preview" });
+                                    adobeDCView.previewFile({
+                                        content: { location: { url: pdfLink } },
+                                        metaData: { fileName: pdfName + ".pdf" }
+                                    }, { embedMode: "IN_LINE", showDownloadPDF: false, showPrintPDF: false });
+                                    console.log("adobe pdf api called");
+                                }
                             }
                         );
                     });
