@@ -122,7 +122,7 @@ jQuery(document).ready(function ($)
                                     adobeDCView.previewFile({
                                         content: { location: { url: pdfLink } },
                                         metaData: { fileName: pdfName + ".pdf" }
-                                    }, { embedMode: "IN_LINE", showDownloadPDF: false, showPrintPDF: false });
+                                    }, { embedMode: "SIZED_CONTAINER", showDownloadPDF: false, showPrintPDF: false });
                                     console.log("adobe pdf api called");
                                 }
                             }
