@@ -139,10 +139,13 @@ jQuery(document).ready(function ($)
                             }
                         }, 50);
 
+                        let pdfType = $('[name="book_layout"]:checked').val();
+                        let pdfAPIURL = pdfType === "dynamic" ? "https://app.useanvil.com/api/v1/fill/p65v2UYaoFFOyLlC6uyK.pdf" : "https://app.useanvil.com/api/v1/fill/5mSggHsUkre8IUdktZN4.pdf";
+
                         createPDF(
                             JSON.stringify(payload),
-                            "https://app.useanvil.com/api/v1/fill/5mSggHsUkre8IUdktZN4.pdf",
-                            "pdfSample",
+                            pdfAPIURL,
+                            pdfType.charAt(0).toUpperCase() + pdfType.slice(1) + "PhotobookSample",
                             function (pdfLink, pdfName)
                             {
                                 clearInterval(disableAddToCart);
