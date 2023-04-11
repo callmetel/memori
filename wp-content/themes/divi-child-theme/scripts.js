@@ -385,6 +385,7 @@ jQuery(document).ready(function ($)
             type: "POST",
             url: wpAjaxURL,
             data: "action=purge_tmpimgs",
+            timeout: 300000,
             success: function (response)
             {
                 console.log(response);
