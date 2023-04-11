@@ -120,8 +120,8 @@ jQuery(document).ready(function ($)
                     {
                         let image_links = JSON.stringify(links);
                         console.log(image_links);
-                        links.h1 = $("#book_title").val();
-                        links.h2 = $("#book_title_h2").val();
+                        links.h1 = $("#book_title").val().toUpperCase();
+                        links.h2 = $("#book_title_h2").val().toLowerCase();
 
                         let payload = {
                             title: "Photobook Example",
