@@ -134,6 +134,7 @@ jQuery(document).ready(function ($)
                         console.log(image_links);
                         links.h1 = {
                             fontFamily: "Arvo",
+                            fontSize: 48,
                             textColor: "#000000",
                             alignment: "center",
                             fontWeight: "bold",
