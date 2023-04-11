@@ -126,7 +126,7 @@ jQuery(document).ready(function ($)
                             textColor: "#000000",
                             alignment: "center",
                             fontWeight: "bold",
-                            value: $("#book_title").val().toUpperCase()
+                            value: $("#book_title").val().split(/\r?\n/).toString().toUpperCase()
                         };
                         links.h2 = {
                             fontFamily: "Arvo",
@@ -134,11 +134,11 @@ jQuery(document).ready(function ($)
                             textColor: "#000000",
                             alignment: "center",
                             fontWeight: "bold",
-                            value: $("#book_title_h2").val().toLowerCase()
+                            value: $("#book_title_h2").val().toUpperCase()
                         };
 
                         let pdfType = $('[name="book_layout"]:checked').val();
-                        let pdfAPIURL = pdfType === "dynamic" ? "https://app.useanvil.com/api/v1/fill/p65v2UYaoFFOyLlC6uyK.pdf" : "https://app.useanvil.com/api/v1/fill/5mSggHsUkre8IUdktZN4.pdf";
+                        let pdfAPIURL = pdfType === "dynamic" ? "https://app.useanvil.com/api/v1/fill/p65v2UYaoFFOyLlC6uyK.pdf" : "https://app.useanvil.com/api/v1/fill/KTzk7OdqbBTwuXlZNqSO.pdf";
                         let pdfTitle = pdfType.charAt(0).toUpperCase() + pdfType.slice(1) + "PhotobookSample";
 
                         let payload = {
