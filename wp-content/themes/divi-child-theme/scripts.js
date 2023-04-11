@@ -367,6 +367,7 @@ jQuery(document).ready(function ($)
             data: form_data,
             processData: false,
             contentType: false,
+            timeout: 300000,
         })
             .done(function (response)
             {
@@ -385,7 +386,6 @@ jQuery(document).ready(function ($)
             type: "POST",
             url: wpAjaxURL,
             data: "action=purge_tmpimgs",
-            timeout: 300000,
             success: function (response)
             {
                 console.log(response);
