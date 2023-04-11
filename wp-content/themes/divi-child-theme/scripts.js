@@ -121,19 +121,19 @@ jQuery(document).ready(function ($)
                         let image_links = JSON.stringify(links);
                         console.log(image_links);
                         links.h1 = {
-                            fontFamily: "Rockwell",
+                            fontFamily: "Arvo",
                             fontSize: 50,
                             textColor: "#000000",
                             alignment: "center",
-                            fontWeight: "boldItalic",
+                            fontWeight: "bold",
                             value: $("#book_title").val().toUpperCase()
                         };
                         links.h2 = {
-                            fontFamily: "Rockwell",
+                            fontFamily: "Arvo",
                             fontSize: 42,
                             textColor: "#000000",
                             alignment: "center",
-                            fontWeight: "boldItalic",
+                            fontWeight: "bold",
                             value: $("#book_title_h2").val().toLowerCase()
                         };
 
