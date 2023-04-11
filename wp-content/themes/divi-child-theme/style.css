@@ -1074,6 +1074,11 @@ body.woocommerce-cart .variation-book_preview_link {
   display: none;
 }
 
+body.woocommerce-cart .ViewSDK_fullScreenPDFViewer,
+body.woocommerce-checkout .ViewSDK_fullScreenPDFViewer {
+  z-index: 99999999;
+}
+
 @media only screen and (min-width:981px) {
   body.woocommerce-cart div.cart-container .row {
     flex-direction: row;

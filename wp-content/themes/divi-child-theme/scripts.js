@@ -15,8 +15,9 @@ jQuery(document).ready(function ($)
     {
         console.log('initialize pdf previews');
 
-        $(".product-preview-button").each(function (index)
+        $(".product-preview-button").click(function (e, index)
         {
+            e.preventDefault();
             let id = "cyob-preview-" + index;
             let pdf = $(this).closest(".cart_item").find(".variation-book_preview_link span").last().text();
             console.log(pdf);
