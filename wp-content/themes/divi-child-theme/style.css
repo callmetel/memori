@@ -917,7 +917,7 @@ body.single-product .woocommerce-message .message-inner {
 }
 
 .single-product-cyob tr.book_preview.complete.container.loading:before {
-  content: "Generating Preview";
+  content: "Creating Photobook";
   font-size: 2.5em;
   font-weight: normal;
   color: #ffffff;
@@ -928,16 +928,22 @@ body.single-product .woocommerce-message .message-inner {
 }
 
 .single-product-cyob tr.book_preview.complete.container.loading:after {
-  content: "";
+  content: "Do Not Refresh";
+  font-size: 1.25em;
+  font-weight: bold;
+  color: #ff6161;
+  text-transform: uppercase;
   background-image: url("/memori/wp-content/uploads/loading.svg");
-  width: 80px;
+  width: auto;
   height: 80px;
   display: block;
   position: absolute;
-  background-size: contain;
+  background-size: 70px;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, calc(-50% + 60px));
+  transform: translate(-50%, calc(-50% + 70px));
+  background-position: bottom center;
+  background-repeat: no-repeat;
 }
 
 .single-product-cyob tr.book_preview>td.text-cell {
