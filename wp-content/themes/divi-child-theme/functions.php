@@ -1,4 +1,8 @@
 <?php
+function isLocalhost()
+{
+	return gethostname() === 'localhost' ? true : false;
+}
 
 function fileVer($filename)
 {
@@ -128,7 +132,7 @@ function get_base_url()
 		=== 'on' ? "https" : "http") .
 		"://" . $_SERVER['HTTP_HOST'];
 
-	return $link . "/memori";
+	return isLocalhost() ? $link : $link . "/memori";
 }
 
 function create_pdf()

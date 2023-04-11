@@ -1,6 +1,38 @@
 jQuery(document).ready(function ($)
 {
     const isDevEnv = window.location.origin.includes("localhost") ? true : false;
+    const ADOBE_KEY = isDevEnv ? "82268229efe242b09c12045b880009c7" : "ae0891e08ac249d999d65c5f1532d50b";
+
+    /** Cart & Checkout Pages */
+    if ($("body").hasClass("woocommerce-cart") || $("body").hasClass("woocommerce-checkout"))
+        if (window.AdobeDC) initPreviewPDF();
+        else
+        {
+            document.addEventListener("adobe_dc_view_sdk.ready", () => initPreviewPDF());
+        }
+
+    function initPreviewPDF()
+    {
+        console.log('initialize pdf previews');
+
+        $(".product-preview-button").each(function (index)
+        {
+            let id = "cyob-preview-" + index;
+            let pdf = $(this).closest(".cart_item").find(".variation-book_preview_link span").last().text();
+            console.log(pdf);
+            $(this).attr("id", id);
+            var adobeDCView = new AdobeDC.View({ clientId: ADOBE_KEY });
+            adobeDCView.previewFile({
+                content: { location: { url: pdf } },
+                metaData: { fileName: "BookSample.pdf", hasReadOnlyAccess: true }
+            }, {
+                embedMode: "LIGHT_BOX", defaultViewMode: "TWO_COLUMN", showDownloadPDF: false,
+                showPrintPDF: false
+            });
+        });
+    }
+
+    /** Create Your Own Book Single Product Page */
     if ($(".single-product-cyob").length > 0)
     {
         $("body.single-product .extra-options tr:not(.style)").hide();
@@ -117,7 +149,7 @@ jQuery(document).ready(function ($)
 
                                 if (window.AdobeDC)
                                 {
-                                    var adobeDCView = new AdobeDC.View({ clientId: "ae0891e08ac249d999d65c5f1532d50b", divId: "book-preview" });
+                                    var adobeDCView = new AdobeDC.View({ clientId: ADOBE_KEY, divId: "book-preview" });
                                     adobeDCView.previewFile({
                                         content: { location: { url: pdfLink } },
                                         metaData: { fileName: pdfName + ".pdf", hasReadOnlyAccess: true }
@@ -244,6 +276,7 @@ jQuery(document).ready(function ($)
         };
     }
 
+    /** Premade Single Product Page */
     if ($(".single-product-premade").length > 0)
     {
         $(window).resize(function ()

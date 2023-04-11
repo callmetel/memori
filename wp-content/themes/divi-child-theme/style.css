@@ -1069,7 +1069,8 @@ body.woocommerce-cart .variation {
   margin-top: 1em;
 }
 
-body.woocommerce-cart .variation .variation-UploadPhotos {
+body.woocommerce-cart .variation .variation-UploadPhotos,
+body.woocommerce-cart .variation-book_preview_link {
   display: none;
 }
 
@@ -1378,6 +1379,11 @@ body.woocommerce-checkout .order-review .order-notice {
 
 body.woocommerce-checkout #payment {
   background-color: var(--lighttan);
+}
+
+body.woocommerce-checkout .variation .variation-UploadPhotos,
+body.woocommerce-checkout .variation-book_preview_link {
+  display: none;
 }
 
 @media only screen and (min-width:981px) {
