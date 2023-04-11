@@ -123,10 +123,15 @@ jQuery(document).ready(function ($)
                         links.h1 = $("#book_title").val().toUpperCase();
                         links.h2 = $("#book_title_h2").val().toLowerCase();
 
+                        let pdfType = $('[name="book_layout"]:checked').val();
+                        let pdfAPIURL = pdfType === "dynamic" ? "https://app.useanvil.com/api/v1/fill/p65v2UYaoFFOyLlC6uyK.pdf" : "https://app.useanvil.com/api/v1/fill/5mSggHsUkre8IUdktZN4.pdf";
+                        let pdfTitle = pdfType.charAt(0).toUpperCase() + pdfType.slice(1) + "PhotobookSample";
+
                         let payload = {
-                            title: "Photobook Example",
-                            fontSize: 10,
-                            textColor: "#333333",
+                            title: pdfTitle,
+                            fontFamily: "Rockwell",
+                            fontSize: 60,
+                            textColor: "#000000",
                             data: links
                         };
                         console.log(payload);
@@ -139,13 +144,10 @@ jQuery(document).ready(function ($)
                             }
                         }, 50);
 
-                        let pdfType = $('[name="book_layout"]:checked').val();
-                        let pdfAPIURL = pdfType === "dynamic" ? "https://app.useanvil.com/api/v1/fill/p65v2UYaoFFOyLlC6uyK.pdf" : "https://app.useanvil.com/api/v1/fill/5mSggHsUkre8IUdktZN4.pdf";
-
                         createPDF(
                             JSON.stringify(payload),
                             pdfAPIURL,
-                            pdfType.charAt(0).toUpperCase() + pdfType.slice(1) + "PhotobookSample",
+                            pdfTitle,
                             function (pdfLink, pdfName)
                             {
                                 clearInterval(disableAddToCart);
