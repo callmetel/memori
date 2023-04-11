@@ -130,7 +130,6 @@ jQuery(document).ready(function ($)
                         let payload = {
                             title: pdfTitle,
                             fontFamily: "Rockwell",
-                            fontSize: 60,
                             textColor: "#000000",
                             data: links
                         };
