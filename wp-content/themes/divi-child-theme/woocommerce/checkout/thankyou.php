@@ -41,7 +41,7 @@ defined('ABSPATH') || exit;
         <?php else : ?>
 
             <div class="text-center" style="max-width:600px;margin:0 auto 50px;">
-                <p class="woocommerce-notice woocommerce-notice--success woocommerce-thankyou-order-received h4 text-center" style="color:#8C8272;"><?php echo apply_filters('woocommerce_thankyou_order_received_text', esc_html__('Thank you for ordering from Memori! Your order is being proccessed and fufilled.', 'woocommerce'), $order); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped 
+                <p class="woocommerce-notice woocommerce-notice--success woocommerce-thankyou-order-received h4 text-center" style="color:#8C8272;"><?php echo apply_filters('woocommerce_thankyou_order_received_text', esc_html__('Thank you for ordering from Memori! Your order is being processed and fufilled.', 'woocommerce'), $order); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped 
                                                                                                                                                     ?></p>
                 <p class="h4 text-center" style="color:#8C8272;">The expected delivery time is 16-20 days.</p>
             </div>
