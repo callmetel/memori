@@ -906,7 +906,7 @@ body.single-product .woocommerce-message .message-inner {
 }
 
 .single-product-cyob tr.book_preview.complete.container.loading {
-  min-height: 500px;
+  min-height: 580px;
   background: rgba(0, 0, 0, 0.7);
   position: relative;
 }
@@ -948,7 +948,7 @@ body.single-product .woocommerce-message .message-inner {
 }
 
 .single-product-cyob tr.book_preview.complete.container #book-preview {
-  height: 500px;
+  height: 580px;
 }
 
 /**
