@@ -120,8 +120,22 @@ jQuery(document).ready(function ($)
                     {
                         let image_links = JSON.stringify(links);
                         console.log(image_links);
-                        links.h1 = $("#book_title").val().toUpperCase();
-                        links.h2 = $("#book_title_h2").val().toLowerCase();
+                        links.h1 = {
+                            fontFamily: "Rockwell",
+                            fontSize: 50,
+                            textColor: "#000000",
+                            alignment: "center",
+                            fontWeight: "boldItalic",
+                            value: $("#book_title").val().toUpperCase()
+                        };
+                        links.h2 = {
+                            fontFamily: "Rockwell",
+                            fontSize: 42,
+                            textColor: "#000000",
+                            alignment: "center",
+                            fontWeight: "boldItalic",
+                            value: $("#book_title_h2").val().toLowerCase()
+                        };
 
                         let pdfType = $('[name="book_layout"]:checked').val();
                         let pdfAPIURL = pdfType === "dynamic" ? "https://app.useanvil.com/api/v1/fill/p65v2UYaoFFOyLlC6uyK.pdf" : "https://app.useanvil.com/api/v1/fill/5mSggHsUkre8IUdktZN4.pdf";
