@@ -36,6 +36,17 @@ jQuery(document).ready(function ($)
     /** Create Your Own Book Single Product Page */
     if ($(".single-product-cyob").length > 0)
     {
+        var updateList = function ()
+        {
+            var input = document.getElementById('book_photos');
+            var children = "";
+            for (var i = 0; i < input.files.length; ++i)
+            {
+                children += input.files.item(i).name + ',';
+            }
+            console.log(children);
+        }
+
         $("body.single-product .extra-options tr:not(.style)").hide();
         $('body.single-product .extra-options label[for*="book_cover_"]').each(function ()
         {
@@ -115,6 +126,7 @@ jQuery(document).ready(function ($)
             {
                 if (getActiveStep(currentActive) === "build")
                 {
+                    updateList();
                     $(".book_preview.complete").addClass("loading");
                     addTmpImgs("#cyob-form", function (links)
                     {
@@ -126,7 +138,7 @@ jQuery(document).ready(function ($)
                             textColor: "#000000",
                             alignment: "center",
                             fontWeight: "bold",
-                            value: $("#book_title").val().split(/\r?\n/).toString().toUpperCase()
+                            value: $("#book_title").val().toUpperCase().split(/\r?\n/)
                         };
                         links.h2 = {
                             fontFamily: "Arvo",
@@ -143,7 +155,7 @@ jQuery(document).ready(function ($)
 
                         let payload = {
                             title: pdfTitle,
-                            fontFamily: "Rockwell",
+                            fontFamily: "Arvo",
                             textColor: "#000000",
                             data: links
                         };
@@ -190,10 +202,10 @@ jQuery(document).ready(function ($)
                                         AdobeDC.View.Enum.CallbackType.EVENT_LISTENER,
                                         function (event)
                                         {
-                                            console.log("pdf opened");
+                                            // console.log("pdf opened");
                                             $(".book_preview.complete").removeClass("loading");
-                                            console.log("Type " + event.type);
-                                            console.log("Data " + event.data);
+                                            // console.log("Type " + event.type);
+                                            // console.log("Data " + event.data);
                                         }, eventOptions
                                     );
                                 }
