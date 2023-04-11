@@ -120,6 +120,8 @@ jQuery(document).ready(function ($)
                     {
                         let image_links = JSON.stringify(links);
                         console.log(image_links);
+                        links.h1 = $("#book_title").val();
+                        links.h2 = $("#book_title_h2").val();
 
                         let payload = {
                             title: "Photobook Example",
@@ -139,7 +141,7 @@ jQuery(document).ready(function ($)
 
                         createPDF(
                             JSON.stringify(payload),
-                            "https://app.useanvil.com/api/v1/fill/BtCm6RuGVTqsizG9w9oT.pdf",
+                            "https://app.useanvil.com/api/v1/fill/5mSggHsUkre8IUdktZN4.pdf",
                             "pdfSample",
                             function (pdfLink, pdfName)
                             {
