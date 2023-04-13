@@ -58,7 +58,8 @@ jQuery(document).ready(function ($)
             var name = $(this).text();
             var image = $(this).attr("for").replace("book_layout_", "");
             var imageBase = isDevEnv ? "/wp-content/uploads/" : "/memori/wp-content/uploads/";
-            $(this).prepend("<span>" + name + "</span>");
+            var subtext = image === "dynamic" ? "upload up to 49 images" : "upload up to 33 images";
+            $(this).prepend("<span>" + name + "</span><span class='subtext'>" + subtext + "</span>");
             $(this).prepend("<img src='" + imageBase + image + ".svg' />");
         });
         $("input#book_photos").attr("accept", ".png,.jpg,.jpeg");

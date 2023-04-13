@@ -875,6 +875,11 @@ body.single-product .woocommerce-message .message-inner {
   margin-top: 10px;
 }
 
+.single-product-cyob .extra-options label[for*="book_layout_"] span.subtext {
+  margin-top: -5px;
+  font-size: 14px;
+}
+
 .single-product-cyob .extra-options .book_photos .value {
   display: none;
 }
