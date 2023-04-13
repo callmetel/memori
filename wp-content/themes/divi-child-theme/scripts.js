@@ -308,6 +308,16 @@ jQuery(document).ready(function ($)
             }
             book_title.value = lines.slice(0, 10).join('\n');
         };
+
+        $('#book_title').on('keypress', function (e)
+        {
+            const maxRows = Number($(this).attr('rows'));
+            const currRows = $(this).val().split("\n").length;
+            if (maxRows === currRows && e.key === 'Enter')
+            {
+                e.preventDefault();
+            }
+        });
     }
 
     /** Premade Single Product Page */
