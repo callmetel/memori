@@ -313,7 +313,7 @@ jQuery(document).ready(function ($)
         {
             const maxRows = Number($(this).attr('rows'));
             const currRows = $(this).val().split("\n").length;
-            if (maxRows === currRows && e.key === 'Enter')
+            if (maxRows === currRows && jQuery("#book_title").val().length >= 23)
             {
                 e.preventDefault();
             }
