@@ -131,12 +131,37 @@ jQuery(document).ready(function ($)
                     $(".book_preview.complete").addClass("loading");
                     addTmpImgs("#cyob-form", function (links)
                     {
-                        let image_links = JSON.stringify(links);
-                        console.log(image_links);
+                        let book_cover = $('input[name="book_cover"]:checked').val();
+                        let text_color;
+
+                        switch (book_cover)
+                        {
+                            case nebula:
+                                text_color = "#393939";
+                                break;
+                            case crepe:
+                                text_color = "#BC856A";
+                                break;
+                            case roma:
+                                text_color = "#EDEDED";
+                                break;
+                            case mercurial:
+                                text_color = "#E3E3E3";
+                                break;
+                            case au_lait:
+                                text_color = "#D4B48E";
+                                break;
+
+                            default:
+                                text_color = "#000000";
+                                break;
+                        }
+
+                        links.cover = "/wp-content/uploads/cover-" + book_cover + ".jpg";
                         links.h1 = {
                             fontFamily: "Arvo",
                             fontSize: 50,
-                            textColor: "#000000",
+                            textColor: text_color,
                             alignment: "center",
                             fontWeight: "bold",
                             value: $("#book_title").val().toUpperCase().split(/\r?\n/)
@@ -144,7 +169,7 @@ jQuery(document).ready(function ($)
                         links.h2 = {
                             fontFamily: "Arvo",
                             fontSize: 42,
-                            textColor: "#000000",
+                            textColor: text_color,
                             alignment: "center",
                             fontWeight: "bold",
                             value: $("#book_title_h2").val().toUpperCase()

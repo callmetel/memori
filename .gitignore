@@ -2,6 +2,8 @@
 /*
 !wp-content/
 !login.js
+!docker-compose.yml
+!README.md
 
 # ignore everything in the "wp-content" directory, except:
 # "mu-plugins", "plugins", "themes" directory
