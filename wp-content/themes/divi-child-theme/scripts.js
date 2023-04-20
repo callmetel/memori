@@ -141,39 +141,39 @@ jQuery(document).ready(function ($)
                             case "nebula":
                                 text_color = "#393939";
                                 pdfAPIURL = pdfType === "dynamic"
-                                    ? pdfBase + "xPGOrFxoX0DvWxl0JBD5" + ".pdf"
-                                    : pdfBase + "vnV9ivd0qUfaEoR3Tfkr" + ".pdf";
+                                    ? pdfBase + "p65v2UYaoFFOyLlC6uyK" + ".pdf"
+                                    : pdfBase + "p65v2UYaoFFOyLlC6uyK" + ".pdf";
                                 break;
                             case "crepe":
                                 text_color = "#BC856A";
                                 pdfAPIURL = pdfType === "dynamic"
-                                    ? pdfBase + "FoasBVdhtY7WnpbLDhzF" + ".pdf"
-                                    : pdfBase + "WVYBHzLklpUByOaeRzr9" + ".pdf";
+                                    ? pdfBase + "p65v2UYaoFFOyLlC6uyK" + ".pdf"
+                                    : pdfBase + "p65v2UYaoFFOyLlC6uyK" + ".pdf";
                                 break;
                             case "roma":
                                 text_color = "#EDEDED";
                                 pdfAPIURL = pdfType === "dynamic"
-                                    ? pdfBase + "xPGOrFxoX0DvWxl0JBD5" + ".pdf"
-                                    : pdfBase + "g8ub5kxzGarsv9W3FZrJ" + ".pdf";
+                                    ? pdfBase + "p65v2UYaoFFOyLlC6uyK" + ".pdf"
+                                    : pdfBase + "p65v2UYaoFFOyLlC6uyK" + ".pdf";
                                 break;
                             case "mercurial":
                                 text_color = "#E3E3E3";
                                 pdfAPIURL = pdfType === "dynamic"
-                                    ? pdfBase + "UWZ4TcTE2xHOrVfzy7pd" + ".pdf"
-                                    : pdfBase + "KUjqvIAmRrFUZml9yYrP" + ".pdf";
+                                    ? pdfBase + "p65v2UYaoFFOyLlC6uyK" + ".pdf"
+                                    : pdfBase + "p65v2UYaoFFOyLlC6uyK" + ".pdf";
                                 break;
                             case "au_lait":
                                 text_color = "#D4B48E";
                                 pdfAPIURL = pdfType === "dynamic"
-                                    ? pdfBase + "3kfJh0bcmXzbkEdCKI3D" + ".pdf"
-                                    : pdfBase + "WaW3vzRZXbYsRqCmG1yT" + ".pdf";
+                                    ? pdfBase + "p65v2UYaoFFOyLlC6uyK" + ".pdf"
+                                    : pdfBase + "p65v2UYaoFFOyLlC6uyK" + ".pdf";
                                 break;
 
                             default:
                                 text_color = "#000000";
                                 pdfAPIURL = pdfType === "dynamic"
-                                    ? pdfBase + "mdL9hIyRxyuwjCMtTF93" + ".pdf"
-                                    : pdfBase + "itRKRGFXRAPc0iof5H5N" + ".pdf";
+                                    ? pdfBase + "p65v2UYaoFFOyLlC6uyK" + ".pdf"
+                                    : pdfBase + "p65v2UYaoFFOyLlC6uyK" + ".pdf";
                                 break;
                         }
 
