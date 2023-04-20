@@ -58,7 +58,7 @@ jQuery(document).ready(function ($)
             var name = $(this).text();
             var image = $(this).attr("for").replace("book_layout_", "");
             var imageBase = isDevEnv ? "/wp-content/uploads/" : "/memori/wp-content/uploads/";
-            var subtext = image === "dynamic" ? "upload up to 49 images" : "upload up to 33 images";
+            var subtext = image === "dynamic" ? "upload up to 50 images" : "upload up to 31 images";
             $(this).prepend("<span>" + name + "</span><span class='subtext'>" + subtext + "</span>");
             $(this).prepend("<img src='" + imageBase + image + ".svg' />");
         });
@@ -132,32 +132,51 @@ jQuery(document).ready(function ($)
                     addTmpImgs("#cyob-form", function (links)
                     {
                         let book_cover = $('input[name="book_cover"]:checked').val();
-                        let text_color;
+                        let pdfType = $('[name="book_layout"]:checked').val();
+                        let pdfBase = "https://app.useanvil.com/api/v1/fill/";
+                        let text_color, pdfAPIURL;
 
                         switch (book_cover)
                         {
-                            case nebula:
+                            case "nebula":
                                 text_color = "#393939";
+                                pdfAPIURL = pdfType === "dynamic"
+                                    ? pdfBase + "xPGOrFxoX0DvWxl0JBD5" + ".pdf"
+                                    : pdfBase + "vnV9ivd0qUfaEoR3Tfkr" + ".pdf";
                                 break;
-                            case crepe:
+                            case "crepe":
                                 text_color = "#BC856A";
+                                pdfAPIURL = pdfType === "dynamic"
+                                    ? pdfBase + "FoasBVdhtY7WnpbLDhzF" + ".pdf"
+                                    : pdfBase + "WVYBHzLklpUByOaeRzr9" + ".pdf";
                                 break;
-                            case roma:
+                            case "roma":
                                 text_color = "#EDEDED";
+                                pdfAPIURL = pdfType === "dynamic"
+                                    ? pdfBase + "xPGOrFxoX0DvWxl0JBD5" + ".pdf"
+                                    : pdfBase + "g8ub5kxzGarsv9W3FZrJ" + ".pdf";
                                 break;
-                            case mercurial:
+                            case "mercurial":
                                 text_color = "#E3E3E3";
+                                pdfAPIURL = pdfType === "dynamic"
+                                    ? pdfBase + "UWZ4TcTE2xHOrVfzy7pd" + ".pdf"
+                                    : pdfBase + "KUjqvIAmRrFUZml9yYrP" + ".pdf";
                                 break;
-                            case au_lait:
+                            case "au_lait":
                                 text_color = "#D4B48E";
+                                pdfAPIURL = pdfType === "dynamic"
+                                    ? pdfBase + "3kfJh0bcmXzbkEdCKI3D" + ".pdf"
+                                    : pdfBase + "WaW3vzRZXbYsRqCmG1yT" + ".pdf";
                                 break;
 
                             default:
                                 text_color = "#000000";
+                                pdfAPIURL = pdfType === "dynamic"
+                                    ? pdfBase + "mdL9hIyRxyuwjCMtTF93" + ".pdf"
+                                    : pdfBase + "itRKRGFXRAPc0iof5H5N" + ".pdf";
                                 break;
                         }
 
-                        links.cover = "/wp-content/uploads/cover-" + book_cover + ".jpg";
                         links.h1 = {
                             fontFamily: "Arvo",
                             fontSize: 50,
@@ -175,8 +194,6 @@ jQuery(document).ready(function ($)
                             value: $("#book_title_h2").val().toUpperCase()
                         };
 
-                        let pdfType = $('[name="book_layout"]:checked').val();
-                        let pdfAPIURL = pdfType === "dynamic" ? "https://app.useanvil.com/api/v1/fill/p65v2UYaoFFOyLlC6uyK.pdf" : "https://app.useanvil.com/api/v1/fill/KTzk7OdqbBTwuXlZNqSO.pdf";
                         let pdfTitle = pdfType.charAt(0).toUpperCase() + pdfType.slice(1) + "PhotobookSample";
 
                         let payload = {
